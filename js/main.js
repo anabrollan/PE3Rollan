@@ -1,48 +1,69 @@
 let biblioteca = [];
 
 function agregarLibro() {
-    let tituloLibro = document.getElementById("nuevoLibro").value;
-    let nombreAutor = document.getElementById("nuevoAutor").value;
+  let tituloLibro = document.getElementById("nuevoLibro").value;
+  let nombreAutor = document.getElementById("nuevoAutor").value;
 
-    if (tituloLibro === "" || nombreAutor === "") {
-        console.error("Por favor, introduce un título y autor");
-        return;
-    }
+  if (tituloLibro === "" || nombreAutor === "") {
+    console.error("Por favor, introduce un título y autor");
+    return;
+  }
 
-    let nuevoLibro = {
-        titulo: tituloLibro,
-        autor: nombreAutor
-    };
+  let nuevoLibro = {
+    titulo: tituloLibro,
+    autor: nombreAutor
+  };
 
-    biblioteca.push(nuevoLibro);
-    mostrarBiblioteca();
-    clearInputFields();
-    saveBibliotecaToLocalStorage();
-
+  biblioteca.push(nuevoLibro);
+  mostrarBiblioteca();
+  clearInputFields();
+  saveBibliotecaToLocalStorage();
 }
 
 function mostrarBiblioteca() {
-    let listaDeLibros = document.getElementById("listaDeLibros");
-    listaDeLibros.innerHTML = "";
+  let listaDeLibros = document.getElementById("listaDeLibros");
+  listaDeLibros.innerHTML = "";
 
-biblioteca.forEach(function(libro) {
+  biblioteca.forEach(function(libro) {
     let itemDeLista = document.createElement("li");
-    itemDeLista.textContent = `${libro.titulo} de ${libro.autor}`;
+    let libroSpan = document.createElement("span");
+    libroSpan.textContent = libro.titulo + " de " + libro.autor;
+    itemDeLista.appendChild(libroSpan);
+
+    let botonEliminar = document.createElement("button");
+    botonEliminar.textContent = "Eliminar";
+    botonEliminar.onclick = function() {
+      eliminarLibro(libro);
+    };
+    itemDeLista.appendChild(botonEliminar);
+
     listaDeLibros.appendChild(itemDeLista);
-});
+  });
+}
+
+function eliminarLibro(libro) {
+  let libroIndex = biblioteca.indexOf(libro);
+
+  if (libroIndex !== -1) {
+    biblioteca.splice(libroIndex, 1);
+    mostrarBiblioteca();
+    saveBibliotecaToLocalStorage();
+  } else {
+    console.error("Libro no encontrado.");
+  }
 }
 
 function clearInputFields() {
-    document.getElementById("nuevoLibro").value = "";
-    document.getElementById("nuevoAutor").value = "";
+  document.getElementById("nuevoLibro").value = "";
+  document.getElementById("nuevoAutor").value = "";
 }
 
 function saveBibliotecaToLocalStorage() {
-    localStorage.setItem("biblioteca", JSON.stringify(biblioteca));
+  localStorage.setItem("biblioteca", JSON.stringify(biblioteca));
 }
 
 let bibliotecaAlmacenada = localStorage.getItem("biblioteca");
 if (bibliotecaAlmacenada) {
-    biblioteca = JSON.parse(bibliotecaAlmacenada);
-    mostrarBiblioteca();
+  biblioteca = JSON.parse(bibliotecaAlmacenada);
+  mostrarBiblioteca();
 }
