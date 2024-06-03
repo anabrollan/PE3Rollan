@@ -1,14 +1,17 @@
 let biblioteca = [];
 
 function agregarLibro() {
-  let tituloLibro = document.getElementById("nuevoLibro").value;
-  let nombreAutor = document.getElementById("nuevoAutor").value;
+  let tituloLibro = document.getElementById("nuevoLibro").value.trim();
+  let nombreAutor = document.getElementById("nuevoAutor").value.trim();
 
-  if (tituloLibro === "" || nombreAutor === "") {
+  if (tituloLibro === "" && nombreAutor === "") {
     let errorMessageContainer = document.getElementById("errorMessage");
-    errorMessageContainer.textContent = "Por favor, introduce un título y autor/-a";
+    errorMessageContainer.textContent = "Por favor, introduce un título y autor";
     return;
   }
+
+  let errorMessageContainer = document.getElementById("errorMessage");
+  errorMessageContainer.textContent = ""; 
 
   let nuevoLibro = {
     titulo: tituloLibro,
