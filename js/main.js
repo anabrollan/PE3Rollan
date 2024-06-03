@@ -5,7 +5,8 @@ function agregarLibro() {
   let nombreAutor = document.getElementById("nuevoAutor").value;
 
   if (tituloLibro === "" || nombreAutor === "") {
-    console.error("Por favor, introduce un título y autor");
+    let errorMessageContainer = document.getElementById("errorMessage");
+    errorMessageContainer.textContent = "Por favor, introduce un título y autor";
     return;
   }
 
@@ -24,7 +25,9 @@ function mostrarBiblioteca() {
   let listaDeLibros = document.getElementById("listaDeLibros");
   listaDeLibros.innerHTML = "";
 
-  biblioteca.forEach(function(libro) {
+
+
+  biblioteca.forEach(libro => {
     let itemDeLista = document.createElement("li");
     let libroSpan = document.createElement("span");
     libroSpan.textContent = libro.titulo + " de " + libro.autor;
@@ -48,9 +51,7 @@ function eliminarLibro(libro) {
     biblioteca.splice(libroIndex, 1);
     mostrarBiblioteca();
     saveBibliotecaToLocalStorage();
-  } else {
-    console.error("Libro no encontrado.");
-  }
+  } 
 }
 
 function clearInputFields() {
