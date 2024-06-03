@@ -3,16 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link src="css/estilos.css">
+    <link rel="stylesheet" href="css/estilos.css">
     <title>Lecturas 2024</title>
 </head>
 <body>
+    <div class="container">
     <h1>¿Cuántos libros has leído este año?</h1>
     <input type="text" id="nuevoLibro" placeholder="Introduce el título">
     <input type="text" id="nuevoAutor" placeholder="Introduce el autor">
     <button onclick="agregarLibro()">Agregar libro</button>
     <div id="errorMessage"></div>
+    <h2>En 2024 he leído...</h2>
     <ul id="listaDeLibros"></ul>
+    </div>
     <script src="./js/main.js"></script>
 </body>
 </html>

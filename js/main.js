@@ -6,7 +6,7 @@ function agregarLibro() {
 
   if (tituloLibro === "" || nombreAutor === "") {
     let errorMessageContainer = document.getElementById("errorMessage");
-    errorMessageContainer.textContent = "Por favor, introduce un título y autor";
+    errorMessageContainer.textContent = "Por favor, introduce un título y autor/-a";
     return;
   }
 
